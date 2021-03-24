@@ -13,7 +13,7 @@ namespace GameFrameWorkV2.Helpers.Structs
     public struct Tile
     {
         public GroundTile Ground { get; set; }
-        public WorldObject Object { get; set; }
-        public Creature Creature { get; set; }
+        public WorldObject? Object { get; set; }
+        public Creature? Creature { get; set; }
     }
 }

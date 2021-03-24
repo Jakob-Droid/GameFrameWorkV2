@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace GameFrameWorkV2.Items
 {
-    public class AttackItem : IItem
+    public abstract class AttackItem : IItem
     {
         public int Damage { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
         public int Range { get; set; }
 
-        public AttackItem(int damage, string name, int range)
+        protected AttackItem(int damage, string name)
         {
             Damage = damage;
             Name = name;
-            Range = range;
         }
     }
 }
