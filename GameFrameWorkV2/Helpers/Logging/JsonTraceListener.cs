@@ -3,27 +3,37 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 
+#nullable enable
 namespace GameFrameWorkV2.Helpers.Logging
 {
     public class JsonTraceListener : TraceListener
     {
+        private string _logPath;
+        public JsonTraceListener(string logPath = "Gamelog.json")
+        {
+            _logPath = logPath;
+        }
+
         public override void Write(string? message)
         {
-            StreamWriter stream = new StreamWriter("Gamelog.json");
+            StreamWriter stream = new StreamWriter("_logPath");
             using (stream)
             {
                 var msg = JsonSerializer.Serialize(new {Date = DateTime.Now, Message = message});
-                stream.WriteAsync(msg);
+                stream.Write(msg);
+                stream.Flush();
             }
         }
 
         public override void WriteLine(string? message)
         {
-            StreamWriter stream = new StreamWriter("Gamelog.json");
+            StreamWriter stream = new StreamWriter(_logPath);
             using (stream)
             {
                 var msg = JsonSerializer.Serialize(new { Date = DateTime.Now, Message = message });
-                stream.WriteLineAsync(msg);
+                stream.WriteLine(msg);
+                stream.Flush();
+
             }
         }
     }

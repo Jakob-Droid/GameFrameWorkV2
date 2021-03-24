@@ -49,6 +49,7 @@ namespace GameFrameWorkV2.Items
                 case "shield":
                     return new Shield(name, reduceDamage);
                 default: return null;
+                
             }
         }
     }

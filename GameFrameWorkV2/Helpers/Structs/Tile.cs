@@ -8,6 +8,7 @@ using GameFrameWorkV2.Helpers.Enums;
 using GameFrameWorkV2.Items;
 using GameFrameWorkV2.WorldClasses;
 
+#nullable enable
 namespace GameFrameWorkV2.Helpers.Structs
 {
     public struct Tile

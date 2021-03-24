@@ -7,14 +7,14 @@ using GameFrameWorkV2.Helpers.Structs;
 
 namespace GameFrameWorkV2.Creatures.Decorators
 {
-    public class LieutenantEnemyDecorator : Creature
+    public class LieutenantEnemyDecorator : AbstractEnemyDecorator
     {
-        protected readonly ICreature Creature;
-        public LieutenantEnemyDecorator(Creature creature)
+        
+        public LieutenantEnemyDecorator(Creature creature) : base(creature)
         {
-            Creature = creature;
-            creature.Name = $"An important {creature.Name}";
-            creature.HitPoints +=20;
+            Name = $"An important {creature.Name}";
+            HitPoints +=20;
+            Position = creature.Position;
         }
     }
 }

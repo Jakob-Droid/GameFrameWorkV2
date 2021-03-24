@@ -7,14 +7,13 @@ using GameFrameWorkV2.Helpers.Structs;
 
 namespace GameFrameWorkV2.Creatures.Decorators
 {
-    public class MinionEnemyDecorator : Creature
+    public class MinionEnemyDecorator : AbstractEnemyDecorator
     {
-        protected readonly ICreature Creature;
-        public MinionEnemyDecorator(Creature creature)
+        public MinionEnemyDecorator(Creature creature):base(creature)
         {
-            Creature = creature;
-            creature.Name = $"A feeble {creature.Name}";
-            creature.HitPoints -= 5;
+            Name = $"A feeble {creature.Name}";
+            HitPoints -= 5;
+            Position = creature.Position;
         }
 
 
