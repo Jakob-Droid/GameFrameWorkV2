@@ -18,7 +18,7 @@ namespace GameFrameWorkV2.Items
      /// <param name="name">The name of the weapon</param>
      /// <param name="range">The range of the weapon</param>
      /// <returns></returns>
-        public IItem CreateItem(string itemType, string name, int damage, int range = 5)
+        public AttackItem CreateAttackItem(string itemType, string name, int damage, int range = 5)
         {
             switch (itemType)
             {
@@ -36,7 +36,7 @@ namespace GameFrameWorkV2.Items
         /// <param name="name">The name of the armour</param>
         /// <param name="reduceDamage">The reduced damage of the weapon</param>
         /// <returns></returns>
-        public IItem CreateItem(string itemType, string name, int reduceDamage)
+        public DefenceItem CreateDefenceItem(string itemType, string name, int reduceDamage)
         {
             switch (itemType)
             {

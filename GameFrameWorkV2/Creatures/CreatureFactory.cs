@@ -38,7 +38,8 @@ namespace GameFrameWorkV2.Creatures
             }
             catch (PositionAlreadyOccupiedException e)
             {
-                _logger.WriteLine($"Failed to create PlayerCreature on specified position \nError:\n {e}");
+                _logger.WriteLine("Failed to create PlayerCreature on specified position Error:");
+                _logger.WriteLine(e);
                 //CreatePlayerCreature(name, null);
                 throw e;
             }
@@ -78,7 +79,8 @@ namespace GameFrameWorkV2.Creatures
             }
             catch (PositionAlreadyOccupiedException e)
             {
-                _logger.WriteLine($"Failed to create EnemyCreature on specified position \nError:\n {e}");
+                _logger.WriteLine("Failed to create EnemyCreature on specified position Error:");
+                _logger.WriteLine(e);
                 //CreateEnemyCreature(rank, null);
                 throw e;
             }

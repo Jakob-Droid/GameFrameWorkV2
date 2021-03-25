@@ -16,7 +16,7 @@ namespace GameFrameWorkV2.Helpers.Logging
 
         public override void Write(string? message)
         {
-            StreamWriter stream = new StreamWriter("_logPath");
+            StreamWriter stream = new StreamWriter("_logPath", true);
             using (stream)
             {
                 var msg = JsonSerializer.Serialize(new {Date = DateTime.Now, Message = message});
@@ -27,7 +27,7 @@ namespace GameFrameWorkV2.Helpers.Logging
 
         public override void WriteLine(string? message)
         {
-            StreamWriter stream = new StreamWriter(_logPath);
+            StreamWriter stream = new StreamWriter(_logPath, true);
             using (stream)
             {
                 var msg = JsonSerializer.Serialize(new { Date = DateTime.Now, Message = message });
