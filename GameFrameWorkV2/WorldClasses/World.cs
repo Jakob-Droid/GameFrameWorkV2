@@ -29,7 +29,7 @@ namespace GameFrameWorkV2.WorldClasses
             DeathObserver.AddObserver(this);
         }
 
-        public void Notify(Creature creature)
+        public void Notify(AbstractCreature creature)
         {
             WorldPlayGround[creature.Position.X, creature.Position.Y].Creature = null;
         }

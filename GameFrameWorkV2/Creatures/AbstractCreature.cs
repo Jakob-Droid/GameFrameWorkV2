@@ -12,7 +12,7 @@ using GameFrameWorkV2.Items.ConcreteDefenceItems;
 
 namespace GameFrameWorkV2.Creatures
 {
-    public abstract class Creature : ICreature
+    public abstract class AbstractCreature : ICreature
     {
         private Random rnd = new Random();
         public Position Position { get; set; }
@@ -24,7 +24,7 @@ namespace GameFrameWorkV2.Creatures
 
       
 
-        protected Creature(int hitPoints, string name, Position position)
+        protected AbstractCreature(int hitPoints, string name, Position position)
         {
             HitPoints = hitPoints;
             Name = name;

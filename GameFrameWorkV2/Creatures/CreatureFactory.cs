@@ -30,7 +30,7 @@ namespace GameFrameWorkV2.Creatures
         /// <param name="name">The name of the player</param>
         /// <param name="pos">The position the player will spawn at</param>
         /// <returns></returns>
-        public Creature CreatePlayerCreature(string name, Position? pos)
+        public AbstractCreature CreatePlayerCreature(string name, Position? pos)
         {
             try
             {
@@ -54,11 +54,11 @@ namespace GameFrameWorkV2.Creatures
         /// <param name="rank"> The rank of your Creature can be boss, lieutenant, defaults to minion </param>
         /// <param name="pos">The position you want your creature to spawn at</param>
         /// <returns></returns>
-        public Creature CreateEnemyCreature(string rank, Position? pos)
+        public AbstractCreature CreateEnemyCreature(string rank, Position? pos)
         {
             try
             {
-                Creature creature;
+                AbstractCreature creature;
                 GeneratePosition(pos);
                 EnemyCreature baseCreature = new EnemyCreature(rnd.Next(20, 100), NameArr[rnd.Next(0, NameArr.Length)], pos);
                 switch (rank)

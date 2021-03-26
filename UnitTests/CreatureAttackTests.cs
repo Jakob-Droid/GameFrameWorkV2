@@ -17,7 +17,7 @@ namespace UnitTests
     public class CreatureAttackTests
     {
         private CreatureFactory _crtFactory;
-        private Creature _enemy;
+        private EnemyCreature _enemy;
         private PlayerCreature _player;
         private World _world;
         private JsonTraceListener _logger;
@@ -26,7 +26,7 @@ namespace UnitTests
             _logger = new JsonTraceListener();
             _world = new World(5,5);
             _crtFactory = new CreatureFactory(_world, _logger);
-            _enemy = _crtFactory.CreateEnemyCreature("boss", new Position(1, 1));
+            _enemy = _crtFactory.CreateEnemyCreature("boss", new Position(1, 1)) as EnemyCreature;
             _player = _crtFactory.CreatePlayerCreature("Bilbo", new Position(2,1)) as PlayerCreature;
             _player.AttackItems.AddAttackItem(new Sword(40, "Sting"));
             _player.AttackItems.AddAttackItem(new Sword(40, "Sting"));

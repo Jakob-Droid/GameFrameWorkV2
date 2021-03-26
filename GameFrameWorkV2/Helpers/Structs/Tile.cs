@@ -15,6 +15,6 @@ namespace GameFrameWorkV2.Helpers.Structs
     {
         public GroundTile Ground { get; set; }
         public WorldObject? Object { get; set; }
-        public Creature? Creature { get; set; }
+        public AbstractCreature? Creature { get; set; }
     }
 }

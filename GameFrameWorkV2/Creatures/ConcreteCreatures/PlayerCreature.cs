@@ -10,7 +10,7 @@ using GameFrameWorkV2.WorldClasses;
 
 namespace GameFrameWorkV2.Creatures.ConcreteCreatures
 {
-    public class PlayerCreature : Creature
+    public class PlayerCreature : AbstractCreature
     {
         private World _world;
         public PlayerCreature(int hitPoints, string name, Position position, World world) : base(hitPoints, name, position)

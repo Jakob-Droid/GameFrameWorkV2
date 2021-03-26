@@ -9,6 +9,6 @@ namespace GameFrameWorkV2.Helpers.Observer
 {
     public interface IObserver
     {
-        void Notify(Creature creature);
+        void Notify(AbstractCreature creature);
     }
 }

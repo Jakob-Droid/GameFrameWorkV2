@@ -15,7 +15,7 @@ namespace GameFrameWorkV2.Helpers.Observer
             _observers.Add(observer);
         }
 
-        private static void NotifyObservers(Creature creature)
+        private static void NotifyObservers(AbstractCreature creature)
         {
             foreach (var observer in _observers)
             {
@@ -23,7 +23,7 @@ namespace GameFrameWorkV2.Helpers.Observer
             }
         }
 
-        public static void OnDeath(Creature creature)
+        public static void OnDeath(AbstractCreature creature)
         {
             NotifyObservers(creature);
         }
