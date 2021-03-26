@@ -22,5 +22,10 @@ namespace GameFrameWorkV2.Items
             Name = name;
             _reduceHitPoints = reduceHitPoints;
         }
+
+        public DefenceItem()
+        {
+            
+        }
     }
 }

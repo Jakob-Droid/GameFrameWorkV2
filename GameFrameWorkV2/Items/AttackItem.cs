@@ -8,7 +8,7 @@ namespace GameFrameWorkV2.Items
 {
     public abstract class AttackItem : IItem
     {
-        public int Damage { get; set; }
+        public virtual int Damage { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public int Range { get; set; }
@@ -17,6 +17,11 @@ namespace GameFrameWorkV2.Items
         {
             Damage = damage;
             Name = name;
+        }
+
+        public AttackItem()
+        {
+            
         }
     }
 }

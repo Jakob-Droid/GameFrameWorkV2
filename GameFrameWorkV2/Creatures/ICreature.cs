@@ -14,8 +14,8 @@ namespace GameFrameWorkV2.Creatures
 
         abstract void Hit(ICreature defender);
 
-        abstract void Loot();
+        abstract void Loot(IItem item);
 
-        abstract void ReceiveHit(ICreature attackCreature);
+        abstract void ReceiveHit(int damage);
     }
 }
