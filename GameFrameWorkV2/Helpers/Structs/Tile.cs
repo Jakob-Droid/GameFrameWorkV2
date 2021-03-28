@@ -14,7 +14,7 @@ namespace GameFrameWorkV2.Helpers.Structs
     public struct Tile
     {
         public GroundTile Ground { get; set; }
-        public WorldObject? Object { get; set; }
+        public List<IWorldObject>? Object { get; set; }
         public AbstractCreature? Creature { get; set; }
     }
 }

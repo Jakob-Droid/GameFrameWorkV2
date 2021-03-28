@@ -57,19 +57,6 @@ namespace GameFrameWorkV2.Helpers.Controller
                     creature.Position.X -= 1;
                     break;
             }
-
-            DrawGround(ref world.WorldPlayGround);
-        }
-
-        private void DrawGround(ref Tile[,] playGround)
-        {
-            for (int i = 1; i < playGround.GetLength(0) - 1; i++)
-            {
-                for (int j = 1; j < playGround.GetLength(1) - 1; j++)
-                {
-                    playGround[i, j] = new Tile() { Ground = GroundTile.EmptyGround };
-                }
-            }
         }
     }
 }

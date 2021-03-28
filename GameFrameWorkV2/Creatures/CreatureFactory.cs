@@ -15,7 +15,7 @@ namespace GameFrameWorkV2.Creatures
         private readonly World _world;
         private JsonTraceListener _logger;
         Random rnd = new Random();
-        public string[] NameArr { get; set; } = new[] { "Orc", "Troll", "Goblin", "Dark Elf" };
+        public string[] NameArr { get; set; } = new[] { "Orc", "Troll", "Enemy", "Dark Elf" };
 
         public CreatureFactory(World world, JsonTraceListener logger)
         {
@@ -34,7 +34,7 @@ namespace GameFrameWorkV2.Creatures
         {
             try
             {
-                GeneratePosition(pos);
+                pos = GeneratePosition(pos);
             }
             catch (PositionAlreadyOccupiedException e)
             {
@@ -59,7 +59,7 @@ namespace GameFrameWorkV2.Creatures
             try
             {
                 AbstractCreature creature;
-                GeneratePosition(pos);
+                pos = GeneratePosition(pos);
                 EnemyCreature baseCreature = new EnemyCreature(rnd.Next(20, 100), NameArr[rnd.Next(0, NameArr.Length)], pos);
                 switch (rank)
                 {
@@ -94,7 +94,7 @@ namespace GameFrameWorkV2.Creatures
         private Position GeneratePosition(Position? pos)
         {
             var tempPos = pos;
-            pos ??= new Position(rnd.Next(0, _world.MaxX), rnd.Next(0, _world.MaxY));
+            pos ??= new Position(rnd.Next(1, _world.MaxX -1), rnd.Next(1, _world.MaxY-1));
             return (_world.WorldPlayGround[pos.X, pos.Y].Creature == null) ?
                 pos : (tempPos != null) ?
                 throw new PositionAlreadyOccupiedException("The position you selected is already occupied by a creature") :

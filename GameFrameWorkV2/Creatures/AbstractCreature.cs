@@ -14,9 +14,22 @@ namespace GameFrameWorkV2.Creatures
 {
     public abstract class AbstractCreature : ICreature
     {
+        private int _hitPoints;
         private Random rnd = new Random();
         public Position Position { get; set; }
-        public int HitPoints { get; set; }
+        public int HitPoints
+        {
+            get { return _hitPoints;}
+            set
+            {
+                _hitPoints = value;
+                if (_hitPoints <= 0)
+                {
+                    DeathObserver.OnDeath(this);
+                }
+            }
+
+        }
         public string Name { get; set; }
         public CompositeDefence DefencesItems { get; set; }
         public CompositeAttack AttackItems { get; set; }
@@ -58,24 +71,23 @@ namespace GameFrameWorkV2.Creatures
             {
                 var dmg = damage - DefencesItems.ReduceHitPoints;
                 //makes sure you cannot be healed by attacks, checks for minus numbers
-                if (dmg < 0)
+                if (dmg > 0)
                 {
                     HitPoints -= dmg;
-                    if (HitPoints == 0)
-                    {
-                        DeathObserver.OnDeath(this);
-                    }
                 }
             }
             else
             {
                 HitPoints -= damage;
-                if (HitPoints == 0)
-                {
-                    DeathObserver.OnDeath(this);
-                }
             }
+        }
 
+        public virtual List<IItem> OnDeath()
+        {
+            List<IItem> droppedItems = new List<IItem>();
+            droppedItems.AddRange(AttackItems.AttackItems);
+            droppedItems.AddRange(DefencesItems.DefenceItems);
+            return droppedItems;
         }
     }
 }

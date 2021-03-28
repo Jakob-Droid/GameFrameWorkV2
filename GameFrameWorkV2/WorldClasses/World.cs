@@ -14,7 +14,8 @@ namespace GameFrameWorkV2.WorldClasses
         public int MaxX { get; set; }
         public int MaxY { get; set; }
 
-        private List<WorldObject> WorldObjects;
+        private List<IWorldObject> WorldObjects;
+        
 
         public Tile[,] WorldPlayGround;
         public DeathObserver DeathObserver { get; set; } = new DeathObserver();
@@ -22,7 +23,7 @@ namespace GameFrameWorkV2.WorldClasses
 
         public World(int maxX, int maxY)
         {
-            WorldObjects = new List<WorldObject>();
+            WorldObjects = new List<IWorldObject>();
             MaxX = maxX;
             MaxY = maxY;
             WorldPlayGround = new Tile[maxX, maxY];
@@ -31,6 +32,16 @@ namespace GameFrameWorkV2.WorldClasses
 
         public void Notify(AbstractCreature creature)
         {
+            var droppedItems = creature.OnDeath();
+            if (WorldPlayGround[creature.Position.X, creature.Position.Y].Object == null)
+            {
+                WorldPlayGround[creature.Position.X, creature.Position.Y].Object = new List<IWorldObject>(){};
+                WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);
+            }
+            else
+            {
+                WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);
+            }
             WorldPlayGround[creature.Position.X, creature.Position.Y].Creature = null;
         }
     }
