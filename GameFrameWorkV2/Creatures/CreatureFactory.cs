@@ -94,11 +94,12 @@ namespace GameFrameWorkV2.Creatures
         private Position GeneratePosition(Position? pos)
         {
             var tempPos = pos;
-            pos ??= new Position(rnd.Next(1, _world.MaxX -1), rnd.Next(1, _world.MaxY-1));
-            return (_world.WorldPlayGround[pos.X, pos.Y].Creature == null) ?
-                pos : (tempPos != null) ?
-                throw new PositionAlreadyOccupiedException("The position you selected is already occupied by a creature") :
-                GeneratePosition(null);
+            pos ??= new Position(rnd.Next(1, _world.MaxX - 1), rnd.Next(1, _world.MaxY - 1));
+            return (_world.WorldPlayGround[pos.X, pos.Y].Creature == null)
+                ? pos
+                : (tempPos != null)
+                    ? throw new PositionAlreadyOccupiedException("The position you selected is already occupied by a creature")
+                    : GeneratePosition(null);
         }
     }
 }

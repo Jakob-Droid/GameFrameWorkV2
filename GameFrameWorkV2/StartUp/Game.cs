@@ -36,7 +36,7 @@ namespace GameFrameWorkV2.StartUp
             Controller = new Controller(World);
             this.rnd = new Random();
         }
-        
+
         public void SetUpEnemyCreatures(int amountOfEnemies)
         {
             var rndRank = rnd.Next(0, 3);
@@ -65,8 +65,16 @@ namespace GameFrameWorkV2.StartUp
         {
             while (true)
             {
-                Console.WriteLine(_draw.DrawWorld(ref World.WorldPlayGround));
-                Console.ReadLine();
+                try
+                {
+                    Console.WriteLine(_draw.DrawWorld(ref World.WorldPlayGround));
+                    string directionControl = Console.ReadLine();
+                    Controller.PlayerController(Controller.ConvertInput(Convert.ToChar(directionControl)), Player, World);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Illegal move");
+                }
 
             }
         }

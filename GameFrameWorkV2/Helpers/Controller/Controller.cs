@@ -20,42 +20,85 @@ namespace GameFrameWorkV2.Helpers.Controller
         {
             this.World = world;
         }
-        public void PlayerController(Input controlInput, PlayerCreature creature, ref World world)
+        public void PlayerController(Input controlInput, AbstractCreature player, World world)
         {
             switch (controlInput)
             {
                 case Input.Up:
-                if (creature.Position.Y +1 == world.MaxY)
-                {
-                    throw new Exception("You cannot leave the area");
-                }
+                    if (player.Position.X - 1 == world.MaxY - 1)
+                    {
+                        throw new Exception("You cannot leave the area");
+                    }
+                    else if (World.WorldPlayGround[player.Position.X - 1, player.Position.Y].Creature != null)
+                    {
+                        player.Hit(World.WorldPlayGround[player.Position.X - 1, player.Position.Y].Creature);
+                    }
+                    else
+                    {
+                        player.Position.X -= 1;
+                    }
+                    
+                    break;
 
-                creature.Position.Y += 1;
-                break;
                 case Input.Down:
-                    if (creature.Position.Y - 1 == world.MaxY)
+                    if (player.Position.X + 1 == world.MaxY - 1)
                     {
                         throw new Exception("You cannot leave the area");
                     }
-
-                    creature.Position.Y -= 1;
+                    else if (World.WorldPlayGround[player.Position.X + 1, player.Position.Y].Creature != null)
+                    {
+                        player.Hit(World.WorldPlayGround[player.Position.X + 1, player.Position.Y].Creature);
+                    }
+                    else
+                    {
+                        player.Position.X += 1;
+                    }
+                    
                     break;
+
                 case Input.Right:
-                    if (creature.Position.X + 1 == world.MaxX)
+                    if (player.Position.Y + 1 == world.MaxY - 1)
                     {
                         throw new Exception("You cannot leave the area");
                     }
-
-                    creature.Position.X += 1;
+                    else if (World.WorldPlayGround[player.Position.X, player.Position.Y + 1].Creature != null)
+                    {
+                        player.Hit(World.WorldPlayGround[player.Position.X, player.Position.Y +1].Creature);
+                    }
+                    else
+                    {
+                        player.Position.Y += 1;
+                    }
+                    
                     break;
+
                 case Input.Left:
-                    if (creature.Position.X - 1 == world.MaxX)
+                    if (player.Position.Y - 1 == world.MaxY - 1)
                     {
                         throw new Exception("You cannot leave the area");
                     }
-
-                    creature.Position.X -= 1;
+                    else if (World.WorldPlayGround[player.Position.X, player.Position.Y -1].Creature != null)
+                    {
+                        player.Hit(World.WorldPlayGround[player.Position.X, player.Position.Y -1].Creature);
+                    }
+                    else
+                    {
+                        player.Position.Y -= 1;
+                    }
                     break;
+
+            }
+        }
+
+        public Input ConvertInput(char x)
+        {
+            switch (x)
+            {
+                case 'w': return Input.Up;
+                case 's': return Input.Down;
+                case 'a': return Input.Left;
+                case 'd': return Input.Right;
+                default: return Input.L;
             }
         }
     }

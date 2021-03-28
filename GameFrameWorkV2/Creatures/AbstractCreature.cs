@@ -19,7 +19,7 @@ namespace GameFrameWorkV2.Creatures
         public Position Position { get; set; }
         public int HitPoints
         {
-            get { return _hitPoints;}
+            get { return _hitPoints; }
             set
             {
                 _hitPoints = value;
@@ -35,7 +35,7 @@ namespace GameFrameWorkV2.Creatures
         public CompositeAttack AttackItems { get; set; }
         public int Strength { get; set; } = 20;
 
-      
+
 
         protected AbstractCreature(int hitPoints, string name, Position position)
         {
@@ -50,7 +50,17 @@ namespace GameFrameWorkV2.Creatures
 
         public virtual void Hit(ICreature defender)
         {
-            defender.ReceiveHit(AttackItems.Damage + Strength);
+            var damage = AttackItems.Damage + Strength;
+            defender.ReceiveHit(damage);
+            if (defender.HitPoints != 0)
+            {
+                Console.WriteLine($"You hit the {defender.Name} for {damage}, it has {defender.HitPoints} HP left");
+            }
+            else
+            {
+                Console.WriteLine($"{defender.Name} is dead!");
+            }
+                
         }
 
         public virtual void Loot(IItem item)

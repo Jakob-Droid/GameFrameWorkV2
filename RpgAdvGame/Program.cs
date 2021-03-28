@@ -11,7 +11,7 @@ namespace RpgAdvGame
     {
         static void Main(string[] args)
         {
-            Game game = new Game(5, 5);
+            Game game = new Game(20, 20);
             game.SetUpPlayer(200, "Bilbo", null);
             game.SetUpEnemyCreatures(5);
             game.StartGame();
