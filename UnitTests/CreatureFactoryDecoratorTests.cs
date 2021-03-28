@@ -17,9 +17,9 @@ namespace UnitTests
 
         public CreatureFactoryDecoratorTests()
         {
-            _logger = new JsonTraceListener("UnitTestLog.json");
             _world = new World(10,10);
             _world2 = new World(10,10);
+            _logger = new JsonTraceListener("UnitTestLog.json");
             _factory = new CreatureFactory(_world, _logger);
         }
 

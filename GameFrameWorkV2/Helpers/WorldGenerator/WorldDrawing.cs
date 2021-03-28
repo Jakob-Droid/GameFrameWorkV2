@@ -62,7 +62,7 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
             {
                 for (int y = 0; y < playGround.GetLength(1); y++)
                 {
-                    if (playGround[x, y].Object is not null) playGround[x, y].Ground = GroundTile.Item;
+                    if (playGround[x, y].Object != null) playGround[x, y].Ground = GroundTile.Item;
                 }
             }
         }

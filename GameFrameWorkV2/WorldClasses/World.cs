@@ -33,12 +33,12 @@ namespace GameFrameWorkV2.WorldClasses
         public void Notify(AbstractCreature creature)
         {
             var droppedItems = creature.OnDeath();
-            if (WorldPlayGround[creature.Position.X, creature.Position.Y].Object == null)
+            if (droppedItems != null && WorldPlayGround[creature.Position.X, creature.Position.Y].Object == null)
             {
                 WorldPlayGround[creature.Position.X, creature.Position.Y].Object = new List<IWorldObject>(){};
                 WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);
             }
-            else
+            else if(droppedItems != null)
             {
                 WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);
             }

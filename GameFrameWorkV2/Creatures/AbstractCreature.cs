@@ -52,7 +52,7 @@ namespace GameFrameWorkV2.Creatures
         {
             var damage = AttackItems.Damage + Strength;
             defender.ReceiveHit(damage);
-            if (defender.HitPoints != 0)
+            if (defender.HitPoints >= 0)
             {
                 Console.WriteLine($"You hit the {defender.Name} for {damage}, it has {defender.HitPoints} HP left");
             }
@@ -95,8 +95,18 @@ namespace GameFrameWorkV2.Creatures
         public virtual List<IItem> OnDeath()
         {
             List<IItem> droppedItems = new List<IItem>();
-            droppedItems.AddRange(AttackItems.AttackItems);
-            droppedItems.AddRange(DefencesItems.DefenceItems);
+            if (this.AttackItems.AttackItems.Count != 0)
+            {
+                droppedItems.AddRange(AttackItems.AttackItems);
+            }
+            if(this.AttackItems.AttackItems.Count != 0)
+            {
+                droppedItems.AddRange(DefencesItems.DefenceItems);
+            }
+            else
+            {
+                droppedItems = null;
+            }
             return droppedItems;
         }
     }

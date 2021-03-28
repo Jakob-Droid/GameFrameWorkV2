@@ -1,8 +1,10 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using GameFrameWorkV2.Creatures.ConcreteCreatures;
 using GameFrameWorkV2.Creatures.Decorators;
+using GameFrameWorkV2.Helpers.ConfigFileHelper.XML;
 using GameFrameWorkV2.Helpers.Exceptions;
 using GameFrameWorkV2.Helpers.Logging;
 using GameFrameWorkV2.Helpers.Structs;
@@ -15,12 +17,26 @@ namespace GameFrameWorkV2.Creatures
         private readonly World _world;
         private JsonTraceListener _logger;
         Random rnd = new Random();
-        public string[] NameArr { get; set; } = new[] { "Orc", "Troll", "Enemy", "Dark Elf" };
+        private XmlConfigurations config;
+        public List<string> NameArr { get; set; }
 
         public CreatureFactory(World world, JsonTraceListener logger)
         {
+            config = XMLReader.ReadGameConfiguartion<XmlConfigurations>();
             _logger = logger;
             _world = world;
+            if (config is null || config.EnemyNamesList.Count == 0)
+            {
+                NameArr = new List<string>() { "Orc", "Troll", "Dark Elf" };
+            }
+            else
+            {
+                NameArr = new List<string>();
+                for (int x = 0; x < config.EnemyNamesList.Count; x++)
+                {
+                    NameArr.Add(config.EnemyNamesList[x].Name);
+                }
+            }
             _logger.WriteLine("Initializing Creature Factory");
         }
 
@@ -60,7 +76,7 @@ namespace GameFrameWorkV2.Creatures
             {
                 AbstractCreature creature;
                 pos = GeneratePosition(pos);
-                EnemyCreature baseCreature = new EnemyCreature(rnd.Next(20, 100), NameArr[rnd.Next(0, NameArr.Length)], pos);
+                EnemyCreature baseCreature = new EnemyCreature(rnd.Next(20, 100), NameArr[rnd.Next(0, NameArr.Count)], pos);
                 switch (rank)
                 {
                     case "boss":
