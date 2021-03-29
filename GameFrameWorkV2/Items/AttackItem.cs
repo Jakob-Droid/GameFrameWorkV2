@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Helpers.Structs;
+﻿using GameFrameWorkV2.Helpers.Structs;
 
 namespace GameFrameWorkV2.Items
 {
@@ -24,7 +19,7 @@ namespace GameFrameWorkV2.Items
 
         public AttackItem()
         {
-            
+
         }
     }
 }

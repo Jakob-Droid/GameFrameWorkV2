@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Helpers.Structs;
+﻿using GameFrameWorkV2.Helpers.Structs;
 
 namespace GameFrameWorkV2.Items
 {
-    public abstract class DefenceItem :IItem
+    public abstract class DefenceItem : IItem
     {
         public int _reduceHitPoints;
 
@@ -17,7 +12,7 @@ namespace GameFrameWorkV2.Items
 
         public virtual int ReduceHitPoints
         {
-            get { return _reduceHitPoints;}
+            get { return _reduceHitPoints; }
             set { _reduceHitPoints = value; }
         }
         public string Type { get; set; }
@@ -29,7 +24,7 @@ namespace GameFrameWorkV2.Items
 
         public DefenceItem()
         {
-            
+
         }
     }
 }

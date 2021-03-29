@@ -1,9 +1,6 @@
-﻿using System;
+﻿using GameFrameWorkV2.Helpers.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Helpers.Exceptions;
 
 namespace GameFrameWorkV2.Items.ConcreteAttackItems
 {
@@ -35,7 +32,7 @@ namespace GameFrameWorkV2.Items.ConcreteAttackItems
             }
             else
             {
-                throw new ItemAlreadyEquipped("You cannot equip this item: " + item.Type +  " as you already have a maximum of these items equipped");
+                throw new ItemAlreadyEquipped("You cannot equip this item: " + item.Type + " as you already have a maximum of these items equipped");
             }
         }
     }

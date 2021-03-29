@@ -19,7 +19,7 @@ namespace GameFrameWorkV2.Helpers.Logging
             StreamWriter stream = new StreamWriter("_logPath", true);
             using (stream)
             {
-                var msg = JsonSerializer.Serialize(new {Date = DateTime.Now, Message = message});
+                var msg = JsonSerializer.Serialize(new { Date = DateTime.Now, Message = message });
                 stream.Write(msg);
                 stream.Flush();
             }

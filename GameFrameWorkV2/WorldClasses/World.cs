@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameFrameWorkV2.Creatures;
 using GameFrameWorkV2.Helpers.Observer;
 using GameFrameWorkV2.Helpers.Structs;
+using System.Collections.Generic;
+using GameFrameWorkV2.Creatures.ConcreteCreatures;
+using GameFrameWorkV2.Helpers.Exceptions;
 
 namespace GameFrameWorkV2.WorldClasses
 {
@@ -15,7 +14,7 @@ namespace GameFrameWorkV2.WorldClasses
         public int MaxY { get; set; }
 
         private List<IWorldObject> WorldObjects;
-        
+
 
         public Tile[,] WorldPlayGround;
         public DeathObserver DeathObserver { get; set; } = new DeathObserver();
@@ -32,15 +31,21 @@ namespace GameFrameWorkV2.WorldClasses
 
         public void Notify(AbstractCreature creature)
         {
+            //dropping items upon death
             var droppedItems = creature.OnDeath();
             if (droppedItems != null && WorldPlayGround[creature.Position.X, creature.Position.Y].Object == null)
             {
-                WorldPlayGround[creature.Position.X, creature.Position.Y].Object = new List<IWorldObject>(){};
+                WorldPlayGround[creature.Position.X, creature.Position.Y].Object = new List<IWorldObject>() { };
                 WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);
             }
-            else if(droppedItems != null)
+            //else if(droppedItems != null)
+            //{
+            //    WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);                                                               
+            //}
+            //Destroys the creature
+            if (creature.GetType() == typeof(PlayerCreature))
             {
-                WorldPlayGround[creature.Position.X, creature.Position.Y].Object.AddRange(droppedItems);
+                throw new YouAreDeadException("The player has died");
             }
             WorldPlayGround[creature.Position.X, creature.Position.Y].Creature = null;
         }

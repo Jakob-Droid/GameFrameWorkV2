@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Items.ConcreteAttackItems;
+﻿using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.Items.ConcreteDefenceItems;
 using GameFrameWorkV2.Items.ConcreteItems;
 
@@ -49,7 +44,7 @@ namespace GameFrameWorkV2.Items
                 case "shield":
                     return new Shield(name, reduceDamage);
                 default: return null;
-                
+
             }
         }
     }

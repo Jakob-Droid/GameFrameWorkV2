@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Creatures;
+﻿using GameFrameWorkV2.Creatures;
 using GameFrameWorkV2.Creatures.ConcreteCreatures;
 using GameFrameWorkV2.Helpers.Enums;
-using GameFrameWorkV2.Helpers.Logging;
 using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.WorldClasses;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace GameFrameWorkV2.Helpers.WorldGenerator
 {
     public class WorldDrawing
     {
-        public AbstractCreature Player { get; }
         private World _world;
-        public WorldDrawing(World world, AbstractCreature player)
+        private List<AbstractCreature> arr = new List<AbstractCreature>();
+
+        public WorldDrawing(World world)
         {
-            Player = player;
             _world = world;
         }
-        protected virtual void DrawEverything()
+
+
+        protected virtual void DrawEverything(ref AbstractCreature player)
         {
             DrawEdges(ref _world.WorldPlayGround);
             DrawGround(ref _world.WorldPlayGround);
             DrawItemsOnTheGround(ref _world.WorldPlayGround);
-            DrawCreature(ref _world.WorldPlayGround);
+            DrawCreature(ref _world.WorldPlayGround, ref player);
         }
 
 
@@ -66,7 +65,7 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
                 }
             }
         }
-        protected virtual void DrawCreature(ref Tile[,] playground)
+        protected virtual void DrawCreature(ref Tile[,] playground, ref AbstractCreature player)
         {
             for (int x = 0; x < playground.GetLength(0); x++)
             {
@@ -74,18 +73,27 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
                 {
                     if (playground[x, y].Creature is not null &&
                         playground[x, y].Creature is EnemyCreature)
+                    {
                         playground[x, y].Ground = GroundTile.Enemy;
+                    }
+
+                    if (playground[x, y].Creature is not null &&
+                        playground[x, y].Creature is PlayerCreature)
+                    {
+                        arr.Add(playground[x, y].Creature);
+                    }
                 }
             }
+            //this is the only way to draw a player??
+            playground[player.Position.X, player.Position.Y].Ground = GroundTile.Player;
 
-            playground[Player.Position.X, Player.Position.Y].Ground = GroundTile.Player;
         }
 
 
-        public virtual string DrawWorld(ref Tile[,] world)
+        public virtual string DrawWorld(ref Tile[,] world, ref AbstractCreature player)
         {
-            Console.SetCursorPosition(0,0);
-            DrawEverything();
+            Console.SetCursorPosition(0, 0);
+            DrawEverything(ref player);
             StringBuilder worldString = new StringBuilder();
             for (int x = 0; x < world.GetLength(0); x++)
             {

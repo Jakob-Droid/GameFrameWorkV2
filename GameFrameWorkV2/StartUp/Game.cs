@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Creatures;
-using GameFrameWorkV2.Creatures.ConcreteCreatures;
+﻿using GameFrameWorkV2.Creatures;
 using GameFrameWorkV2.Helpers.Controller;
 using GameFrameWorkV2.Helpers.Logging;
 using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.Helpers.WorldGenerator;
 using GameFrameWorkV2.Items;
 using GameFrameWorkV2.WorldClasses;
+using System;
+using System.Runtime.CompilerServices;
+using GameFrameWorkV2.Creatures.ConcreteCreatures;
+using GameFrameWorkV2.Helpers.Exceptions;
 
 namespace GameFrameWorkV2.StartUp
 {
@@ -18,7 +16,7 @@ namespace GameFrameWorkV2.StartUp
     {
         public ItemFactory ItemFactory { get; set; }
         public CreatureFactory CreatureFactory { get; set; }
-        public World World { get; set; }
+        public World World;
         public JsonTraceListener Logger { get; set; }
         public Controller Controller { get; set; }
         private WorldDrawing _draw;
@@ -33,8 +31,9 @@ namespace GameFrameWorkV2.StartUp
             World = new World(worldMaxX, worldMaxY);
             ItemFactory = new ItemFactory();
             CreatureFactory = new CreatureFactory(World, Logger);
-            Controller = new Controller(World);
-            this.rnd = new Random();
+            Controller = new Controller(ref World);
+            rnd = new Random();
+            _draw = new WorldDrawing(World);
         }
 
         public void SetUpEnemyCreatures(int amountOfEnemies)
@@ -46,42 +45,63 @@ namespace GameFrameWorkV2.StartUp
             if (rndRank == 3) rankString = "minion";
             var creature = CreatureFactory.CreateEnemyCreature(rankString, null);
             World.WorldPlayGround[creature.Position.X, creature.Position.Y].Creature = creature;
-            if (amountOfEnemies > 0)
+            if (amountOfEnemies - 1 > 0)
             {
                 SetUpEnemyCreatures(--amountOfEnemies);
             }
         }
 
 
-        public void SetUpPlayer(int hitPoints, string name, Position? position)
+        public void SetUpPlayer(string name, Position? position)
         {
             Player = CreatureFactory.CreatePlayerCreature(name, position);
-            _draw = new WorldDrawing(World, Player);
+            World.WorldPlayGround[Player.Position.X, Player.Position.Y].Creature = Player;
         }
 
-
-
-        public void StartGame()
+        private void RemoveCreaturesOnRestart()
         {
-            while (true)
+            for (int x = 0; x < World.WorldPlayGround.GetLength(0); x++)
             {
-                try
+                for (int y = 0; y < World.WorldPlayGround.GetLength(1); y++)
                 {
-                    Console.WriteLine(_draw.DrawWorld(ref World.WorldPlayGround));
-                    string directionControl = Console.ReadLine();
-                    Controller.PlayerController(Controller.ConvertInput(Convert.ToChar(directionControl)), Player, World);
+                    if (World.WorldPlayGround[x, y].Creature is EnemyCreature)
+                    {
+                        World.WorldPlayGround[x, y].Creature = null;
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Illegal move");
-                }
-
             }
         }
 
 
 
-
-
+        public void StartGame(string playerName, Position pos, int amountOfEnemies)
+        {
+            SetUpPlayer(playerName, pos);
+            SetUpEnemyCreatures(amountOfEnemies);
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine(_draw.DrawWorld(ref World.WorldPlayGround, ref Player));
+                    char directionControl = Console.ReadKey().KeyChar;
+                    Controller.PlayerController(Controller.ConvertInput(Convert.ToChar(directionControl)), ref Player);
+                }
+                catch (Exception e)
+                {
+                    if (e.GetType() == typeof(IllegalMoveException))
+                    {
+                        Console.WriteLine("Illegal move");
+                    }
+                    else if (e.GetType() == typeof(YouAreDeadException))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ohh no you are dead, press a button to restart");
+                        Console.ReadKey();
+                        RemoveCreaturesOnRestart();
+                        StartGame("Bilbo", null, 5);
+                    }
+                }
+            }
+        }
     }
 }

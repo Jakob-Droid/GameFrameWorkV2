@@ -1,7 +1,4 @@
 ﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using GameFrameWorkV2.Creatures.ConcreteCreatures;
 using GameFrameWorkV2.Creatures.Decorators;
 using GameFrameWorkV2.Helpers.ConfigFileHelper.XML;
@@ -9,6 +6,8 @@ using GameFrameWorkV2.Helpers.Exceptions;
 using GameFrameWorkV2.Helpers.Logging;
 using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.WorldClasses;
+using System;
+using System.Collections.Generic;
 
 namespace GameFrameWorkV2.Creatures
 {
@@ -59,7 +58,7 @@ namespace GameFrameWorkV2.Creatures
                 //CreatePlayerCreature(name, null);
                 throw e;
             }
-            var creature = new PlayerCreature(200, name, pos, _world);
+            AbstractCreature creature = new PlayerCreature(200, name, pos);
             _logger.WriteLine($"Created Creature {creature}");
             return creature;
         }

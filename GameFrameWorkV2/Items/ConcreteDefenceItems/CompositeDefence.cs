@@ -1,10 +1,6 @@
-﻿using System;
+﻿using GameFrameWorkV2.Helpers.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Helpers.Exceptions;
 
 namespace GameFrameWorkV2.Items.ConcreteDefenceItems
 {
@@ -28,7 +24,7 @@ namespace GameFrameWorkV2.Items.ConcreteDefenceItems
 
         public void AddDefenceItem(DefenceItem item)
         {
-            if (!DefenceItems.Contains(DefenceItems.Find(x=> x.Type == item.Type)))
+            if (!DefenceItems.Contains(DefenceItems.Find(x => x.Type == item.Type)))
             {
                 DefenceItems.Add(item);
             }

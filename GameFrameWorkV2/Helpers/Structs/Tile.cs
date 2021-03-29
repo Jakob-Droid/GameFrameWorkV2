@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Creatures;
+﻿using GameFrameWorkV2.Creatures;
 using GameFrameWorkV2.Helpers.Enums;
-using GameFrameWorkV2.Items;
 using GameFrameWorkV2.WorldClasses;
+using System.Collections.Generic;
 
 #nullable enable
 namespace GameFrameWorkV2.Helpers.Structs

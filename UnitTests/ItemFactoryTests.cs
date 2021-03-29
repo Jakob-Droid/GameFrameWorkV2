@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Items;
-using GameFrameWorkV2.Items.ConcreteItems;
+﻿using GameFrameWorkV2.Items;
 using Xunit;
 
 namespace UnitTests

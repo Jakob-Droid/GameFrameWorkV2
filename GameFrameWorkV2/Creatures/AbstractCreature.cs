@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Helpers.Enums;
-using GameFrameWorkV2.Helpers.Observer;
+﻿using GameFrameWorkV2.Helpers.Observer;
 using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.Items;
 using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.Items.ConcreteDefenceItems;
+using System;
+using System.Collections.Generic;
 
 namespace GameFrameWorkV2.Creatures
 {
@@ -48,20 +44,8 @@ namespace GameFrameWorkV2.Creatures
         }
 
 
-        public virtual void Hit(ICreature defender)
-        {
-            var damage = AttackItems.Damage + Strength;
-            defender.ReceiveHit(damage);
-            if (defender.HitPoints >= 0)
-            {
-                Console.WriteLine($"You hit the {defender.Name} for {damage}, it has {defender.HitPoints} HP left");
-            }
-            else
-            {
-                Console.WriteLine($"{defender.Name} is dead!");
-            }
-                
-        }
+        public abstract void Hit(ICreature defender);
+
 
         public virtual void Loot(IItem item)
         {
@@ -99,7 +83,7 @@ namespace GameFrameWorkV2.Creatures
             {
                 droppedItems.AddRange(AttackItems.AttackItems);
             }
-            if(this.AttackItems.AttackItems.Count != 0)
+            if (this.AttackItems.AttackItems.Count != 0)
             {
                 droppedItems.AddRange(DefencesItems.DefenceItems);
             }

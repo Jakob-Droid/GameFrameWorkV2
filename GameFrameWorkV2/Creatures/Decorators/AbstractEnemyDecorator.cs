@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Creatures.ConcreteCreatures;
-using GameFrameWorkV2.Helpers.Structs;
+﻿using GameFrameWorkV2.Creatures.ConcreteCreatures;
 
 namespace GameFrameWorkV2.Creatures.Decorators
 {

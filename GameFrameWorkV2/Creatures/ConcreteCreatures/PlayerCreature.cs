@@ -1,21 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameFrameWorkV2.Helpers.Enums;
-using GameFrameWorkV2.Helpers.Structs;
-using GameFrameWorkV2.Items;
-using GameFrameWorkV2.WorldClasses;
+﻿using GameFrameWorkV2.Helpers.Structs;
+using System;
 
 namespace GameFrameWorkV2.Creatures.ConcreteCreatures
 {
     public class PlayerCreature : AbstractCreature
     {
-        private World _world;
-        public PlayerCreature(int hitPoints, string name, Position position, World world) : base(hitPoints, name, position)
+        public PlayerCreature(int hitPoints, string name, Position position) : base(hitPoints, name, position)
         {
-            _world = world;
+        }
+
+        public override void Hit(ICreature defender)
+        {
+            var damage = AttackItems.Damage + Strength;
+            defender.ReceiveHit(damage);
+            if (defender.HitPoints > 0)
+            {
+                Console.WriteLine($"You hit the {defender.Name} for {damage}, it has {defender.HitPoints} HP left");
+            }
+            else
+            {
+                Console.WriteLine($"{defender.Name} is dead!");
+            }
         }
     }
 }

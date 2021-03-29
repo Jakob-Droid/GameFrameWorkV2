@@ -1,5 +1,4 @@
 ﻿using GameFrameWorkV2.Helpers.Structs;
-using GameFrameWorkV2.Items;
 
 namespace GameFrameWorkV2.WorldClasses
 {

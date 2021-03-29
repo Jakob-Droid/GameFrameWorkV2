@@ -1,4 +1,3 @@
-using System;
 using GameFrameWorkV2.Creatures;
 using GameFrameWorkV2.Helpers.Exceptions;
 using GameFrameWorkV2.Helpers.Logging;
@@ -17,8 +16,8 @@ namespace UnitTests
 
         public CreatureFactoryDecoratorTests()
         {
-            _world = new World(10,10);
-            _world2 = new World(10,10);
+            _world = new World(10, 10);
+            _world2 = new World(10, 10);
             _logger = new JsonTraceListener("UnitTestLog.json");
             _factory = new CreatureFactory(_world, _logger);
         }
@@ -29,7 +28,7 @@ namespace UnitTests
         {
             var creat = _factory.CreatePlayerCreature("Jens", new Position(5, 5));
             _world.WorldPlayGround[creat.Position.X, creat.Position.Y].Creature = creat;
-            
+
             Assert.Throws<PositionAlreadyOccupiedException>(() =>
             {
                 creat = _factory.CreatePlayerCreature("Jens", new Position(5, 5));
@@ -41,7 +40,7 @@ namespace UnitTests
         [Fact]
         public void Test_Initializing_Of_Creature_With_Same_Position()
         {
-            var creat = _factory.CreateEnemyCreature("boss", new Position(5,5));
+            var creat = _factory.CreateEnemyCreature("boss", new Position(5, 5));
             _world.WorldPlayGround[creat.Position.X, creat.Position.Y].Creature = creat;
 
             Assert.Throws<PositionAlreadyOccupiedException>(() =>
