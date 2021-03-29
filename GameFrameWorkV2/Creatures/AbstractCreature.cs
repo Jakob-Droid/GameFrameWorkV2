@@ -45,7 +45,11 @@ namespace GameFrameWorkV2.Creatures
 
 
         public abstract void Hit(ICreature defender);
-
+        protected int CalculateDamge(int damage, ICreature defender)
+        {
+            var dmg = (damage - defender.DefencesItems.ReduceHitPoints);
+            return dmg > 0 ? dmg : 0;
+        }
 
         public virtual void Loot(IItem item)
         {

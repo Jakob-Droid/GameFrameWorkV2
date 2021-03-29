@@ -15,12 +15,13 @@ namespace GameFrameWorkV2.Creatures.ConcreteCreatures
             defender.ReceiveHit(damage);
             if (defender.HitPoints > 0)
             {
-                Console.WriteLine($"You hit the {defender.Name} for {damage}, it has {defender.HitPoints} HP left");
+                Console.WriteLine($"You hit the {defender.Name} for {CalculateDamge(damage, defender)}, it has {defender.HitPoints} HP left");
             }
             else
             {
                 Console.WriteLine($"{defender.Name} is dead!");
             }
         }
+        
     }
 }

@@ -8,6 +8,7 @@ using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.WorldClasses;
 using System;
 using System.Collections.Generic;
+using GameFrameWorkV2.Items;
 
 namespace GameFrameWorkV2.Creatures
 {

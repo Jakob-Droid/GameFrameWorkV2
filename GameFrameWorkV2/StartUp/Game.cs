@@ -44,6 +44,10 @@ namespace GameFrameWorkV2.StartUp
             if (rndRank == 2) rankString = "lieutenant";
             if (rndRank == 3) rankString = "minion";
             var creature = CreatureFactory.CreateEnemyCreature(rankString, null);
+            creature.AttackItems.AddAttackItem(ItemFactory.CreateAttackItem("sword","Orchrist",15,1));
+            creature.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("armour", "BreastPlate of Salazar", 10));
+            creature.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("boots", "Boots of Thunder", 2));
+
             World.WorldPlayGround[creature.Position.X, creature.Position.Y].Creature = creature;
             if (amountOfEnemies - 1 > 0)
             {
@@ -55,6 +59,10 @@ namespace GameFrameWorkV2.StartUp
         public void SetUpPlayer(string name, Position? position)
         {
             Player = CreatureFactory.CreatePlayerCreature(name, position);
+            Player.AttackItems.AddAttackItem(ItemFactory.CreateAttackItem("sword", "Sting", 50, 1));
+            Player.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("armour", "Mithril Coat", 45));
+            Player.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("boots", "Hairy Hobbit Feet", 5));
+            Player.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("helmet", "Helmet of Gloin", 15));
             World.WorldPlayGround[Player.Position.X, Player.Position.Y].Creature = Player;
         }
 
