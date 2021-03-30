@@ -1,6 +1,6 @@
-﻿using GameFrameWorkV2.Items;
-using GameFrameWorkV2.Items.ConcreteAttackItems;
+﻿using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.Items.ConcreteDefenceItems;
+using GameFrameWorkV2.WorldClasses;
 
 namespace GameFrameWorkV2.Creatures
 {
@@ -11,7 +11,7 @@ namespace GameFrameWorkV2.Creatures
 
         abstract void Hit(ICreature defender);
 
-        abstract void Loot(IItem item);
+        abstract void Loot(World world, string itemName);
 
         abstract void ReceiveHit(int damage);
         public CompositeDefence DefencesItems { get; set; }

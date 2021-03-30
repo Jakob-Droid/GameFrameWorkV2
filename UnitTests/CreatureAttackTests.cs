@@ -7,6 +7,7 @@ using GameFrameWorkV2.Items;
 using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.WorldClasses;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace UnitTests
@@ -45,8 +46,26 @@ namespace UnitTests
         }
 
         [Fact]
+        public void Player_Try_Equip_Valid_Item()
+        {
+            var item = _itmFactory.CreateDefenceItem("boots", "Booties", 5);
+            _player.LootItemOnGround(item);
+            Assert.NotNull(_player.DefencesItems.DefenceItems.Find(x=>x.Name == "Booties"));
+        }
+
+        [Fact]
+        public void Player_Try_To_Loot_From_The_Ground()
+        {
+            _world.WorldPlayGround[_player.Position.X, _player.Position.Y].Object = new List<IWorldObject>();
+            _world.WorldPlayGround[_player.Position.X, _player.Position.Y].Object.Add(_itmFactory.CreateDefenceItem("armour", "Mithril Coat", 5));
+            _player.Loot(_world, "Mithril Coat");
+            Assert.NotNull(_player.DefencesItems.DefenceItems.Find(x=>x.Name == "Mithril Coat"));
+        }
+        [Fact]
         public void Player_Try_Equip_Three_Weapon()
         {
+            //we've already equipped two sword in the constructor
+            //This is the third, and "Bilbo" only have two hands, so he cannot carry two swords
             Assert.Throws<ItemAlreadyEquipped>(() => _player.AttackItems.AddAttackItem(new Sword(40, "Sting")));
         }
 

@@ -7,7 +7,6 @@
         {
             Name = $"An important {creature.Name}";
             HitPoints += 20;
-            Position = creature.Position;
         }
     }
 }

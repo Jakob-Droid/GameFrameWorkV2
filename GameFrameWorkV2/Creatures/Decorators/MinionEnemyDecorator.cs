@@ -6,7 +6,6 @@
         {
             Name = $"A feeble {creature.Name}";
             HitPoints -= 5;
-            Position = creature.Position;
         }
 
 

@@ -13,6 +13,7 @@ namespace GameFrameWorkV2.Creatures.Decorators
         public AbstractEnemyDecorator(AbstractCreature creature) : base(creature.HitPoints, creature.Name, creature.Position)
         {
             Creature = creature;
+            Position = creature.Position;
         }
     }
 }

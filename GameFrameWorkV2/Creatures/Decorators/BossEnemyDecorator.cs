@@ -6,7 +6,6 @@
         {
             Name = $"A very dangerous {creature.Name}";
             HitPoints += 200;
-            Position = creature.Position;
         }
     }
 }

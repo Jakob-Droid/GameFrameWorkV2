@@ -5,6 +5,7 @@ using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.Items.ConcreteDefenceItems;
 using System;
 using System.Collections.Generic;
+using GameFrameWorkV2.WorldClasses;
 
 namespace GameFrameWorkV2.Creatures
 {
@@ -31,8 +32,6 @@ namespace GameFrameWorkV2.Creatures
         public CompositeAttack AttackItems { get; set; }
         public int Strength { get; set; } = 20;
 
-
-
         protected AbstractCreature(int hitPoints, string name, Position position)
         {
             HitPoints = hitPoints;
@@ -45,21 +44,51 @@ namespace GameFrameWorkV2.Creatures
 
 
         public abstract void Hit(ICreature defender);
+       
+
         protected int CalculateDamge(int damage, ICreature defender)
         {
             var dmg = (damage - defender.DefencesItems.ReduceHitPoints);
             return dmg > 0 ? dmg : 0;
         }
 
-        public virtual void Loot(IItem item)
+        public virtual void Loot(World world, string itemName)
         {
-            if (typeof(IItem) == typeof(AttackItem))
+            DisplayItemsOnGround(world, itemName);
+        }
+
+        public virtual void LootItemOnGround(IItem item)
+        {
+            if (item.GetType().BaseType == typeof(AttackItem))
             {
                 AttackItems.AddAttackItem((AttackItem)item);
             }
-            if (typeof(IItem) == typeof(DefenceItem))
+            if (item.GetType().BaseType == typeof(DefenceItem))
             {
                 DefencesItems.AddDefenceItem((DefenceItem)item);
+            }
+        }
+
+        public virtual void DisplayItemsOnGround(World world,string itemName)
+        {
+            var items = world.WorldPlayGround[this.Position.X, this.Position.Y].Object;
+            var counter = 1;
+            foreach (var item in items)
+            {
+                Console.WriteLine($"{counter} {item.Name}");
+            }
+
+            PickUpItem(world, itemName);
+        }
+
+        protected virtual void PickUpItem(World world, string itemName)
+        {
+            var items = world.WorldPlayGround[this.Position.X, this.Position.Y].Object;
+            if (items.Contains(items.Find(x => x.Name == itemName)))
+            {
+                var item = world.WorldPlayGround[this.Position.X, this.Position.Y].Object.Find(x => x.Name == itemName);
+                world.WorldPlayGround[this.Position.X, this.Position.Y].Object.Remove(item);
+                LootItemOnGround(item as IItem);
             }
         }
 
