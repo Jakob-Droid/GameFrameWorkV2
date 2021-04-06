@@ -1,5 +1,4 @@
-﻿using System;
-using GameFrameWorkV2.Creatures;
+﻿using GameFrameWorkV2.Creatures;
 using GameFrameWorkV2.Helpers.Observer;
 using GameFrameWorkV2.Helpers.Structs;
 using System.Collections.Generic;

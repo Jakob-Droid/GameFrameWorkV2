@@ -8,12 +8,6 @@ namespace RpgAdvGame
         {
             Game game = new Game(20, 20);
             game.StartGame("Bilbo", null, 5);
-
-
-
-
-
         }
-
     }
 }

@@ -3,9 +3,9 @@ using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.Items;
 using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.Items.ConcreteDefenceItems;
+using GameFrameWorkV2.WorldClasses;
 using System;
 using System.Collections.Generic;
-using GameFrameWorkV2.WorldClasses;
 
 namespace GameFrameWorkV2.Creatures
 {
@@ -39,12 +39,10 @@ namespace GameFrameWorkV2.Creatures
             Position = position;
             AttackItems = new CompositeAttack();
             DefencesItems = new CompositeDefence();
-
         }
 
-
         public abstract void Hit(ICreature defender);
-       
+
 
         protected int CalculateDamge(int damage, ICreature defender)
         {
@@ -69,7 +67,7 @@ namespace GameFrameWorkV2.Creatures
             }
         }
 
-        public virtual void DisplayItemsOnGround(World world,string itemName)
+        public virtual void DisplayItemsOnGround(World world, string itemName)
         {
             var items = world.WorldPlayGround[this.Position.X, this.Position.Y].Object;
             var counter = 1;
@@ -77,7 +75,6 @@ namespace GameFrameWorkV2.Creatures
             {
                 Console.WriteLine($"{counter} {item.Name}");
             }
-
             PickUpItem(world, itemName);
         }
 

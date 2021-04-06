@@ -7,7 +7,6 @@ using GameFrameWorkV2.Items;
 using GameFrameWorkV2.Items.ConcreteAttackItems;
 using GameFrameWorkV2.WorldClasses;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Xunit;
 
 namespace UnitTests
@@ -50,7 +49,7 @@ namespace UnitTests
         {
             var item = _itmFactory.CreateDefenceItem("boots", "Booties", 5);
             _player.LootItemOnGround(item);
-            Assert.NotNull(_player.DefencesItems.DefenceItems.Find(x=>x.Name == "Booties"));
+            Assert.NotNull(_player.DefencesItems.DefenceItems.Find(x => x.Name == "Booties"));
         }
 
         [Fact]
@@ -59,7 +58,7 @@ namespace UnitTests
             _world.WorldPlayGround[_player.Position.X, _player.Position.Y].Object = new List<IWorldObject>();
             _world.WorldPlayGround[_player.Position.X, _player.Position.Y].Object.Add(_itmFactory.CreateDefenceItem("armour", "Mithril Coat", 5));
             _player.Loot(_world, "Mithril Coat");
-            Assert.NotNull(_player.DefencesItems.DefenceItems.Find(x=>x.Name == "Mithril Coat"));
+            Assert.NotNull(_player.DefencesItems.DefenceItems.Find(x => x.Name == "Mithril Coat"));
         }
         [Fact]
         public void Player_Try_Equip_Three_Weapon()

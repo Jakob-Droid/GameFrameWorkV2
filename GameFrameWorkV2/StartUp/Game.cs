@@ -1,14 +1,13 @@
 ﻿using GameFrameWorkV2.Creatures;
+using GameFrameWorkV2.Creatures.ConcreteCreatures;
 using GameFrameWorkV2.Helpers.Controller;
+using GameFrameWorkV2.Helpers.Exceptions;
 using GameFrameWorkV2.Helpers.Logging;
 using GameFrameWorkV2.Helpers.Structs;
 using GameFrameWorkV2.Helpers.WorldGenerator;
 using GameFrameWorkV2.Items;
 using GameFrameWorkV2.WorldClasses;
 using System;
-using System.Runtime.CompilerServices;
-using GameFrameWorkV2.Creatures.ConcreteCreatures;
-using GameFrameWorkV2.Helpers.Exceptions;
 
 namespace GameFrameWorkV2.StartUp
 {
@@ -44,7 +43,7 @@ namespace GameFrameWorkV2.StartUp
             if (rndRank == 2) rankString = "lieutenant";
             if (rndRank == 3) rankString = "minion";
             var creature = CreatureFactory.CreateEnemyCreature(rankString, null);
-            creature.AttackItems.AddAttackItem(ItemFactory.CreateAttackItem("sword","Orchrist",15,1));
+            creature.AttackItems.AddAttackItem(ItemFactory.CreateAttackItem("sword", "Orchrist", 15, 1));
             creature.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("armour", "BreastPlate of Salazar", 10));
             creature.DefencesItems.AddDefenceItem(ItemFactory.CreateDefenceItem("boots", "Boots of Thunder", 2));
 

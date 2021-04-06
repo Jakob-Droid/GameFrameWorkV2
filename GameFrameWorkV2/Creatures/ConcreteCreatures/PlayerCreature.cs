@@ -22,6 +22,6 @@ namespace GameFrameWorkV2.Creatures.ConcreteCreatures
                 Console.WriteLine($"{defender.Name} is dead!");
             }
         }
-        
+
     }
 }
