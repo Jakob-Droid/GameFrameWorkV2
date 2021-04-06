@@ -8,7 +8,6 @@ namespace GameFrameWorkV2.Helpers.Controller
     public class Controller
     {
         private World World;
-
         public Controller(ref World world)
         {
             this.World = world;
@@ -99,6 +98,7 @@ namespace GameFrameWorkV2.Helpers.Controller
                         World.WorldPlayGround[play.Position.X, play.Position.Y].Creature = play;
 
                     }
+
                     break;
             }
         }

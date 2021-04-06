@@ -6,7 +6,6 @@ namespace GameFrameWorkV2.Helpers.ConfigFileHelper.XML
 {
     public class XMLReader
     {
-
         public static T ReadGameConfiguartion<T>()
         {
             try

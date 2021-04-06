@@ -6,7 +6,6 @@ namespace GameFrameWorkV2.Items.ConcreteDefenceItems
 {
     public class CompositeDefence : DefenceItem
     {
-        //TODO -- is this the right way to use this?
         public List<DefenceItem> DefenceItems { get; set; }
         public CompositeDefence()
         {

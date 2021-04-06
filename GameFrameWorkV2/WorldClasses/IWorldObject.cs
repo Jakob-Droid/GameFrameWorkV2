@@ -7,6 +7,5 @@ namespace GameFrameWorkV2.WorldClasses
         public Position Position { get; set; }
         public bool IsLootable { get; set; }
         public string Name { get; set; }
-
     }
 }

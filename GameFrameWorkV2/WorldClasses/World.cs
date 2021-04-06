@@ -11,13 +11,10 @@ namespace GameFrameWorkV2.WorldClasses
     {
         public int MaxX { get; set; }
         public int MaxY { get; set; }
-
         private List<IWorldObject> WorldObjects;
-
 
         public Tile[,] WorldPlayGround;
         public DeathObserver DeathObserver { get; set; } = new DeathObserver();
-
 
         public World(int maxX, int maxY)
         {
@@ -27,7 +24,6 @@ namespace GameFrameWorkV2.WorldClasses
             WorldPlayGround = new Tile[maxX, maxY];
             DeathObserver.AddObserver(this);
         }
-
         public void Notify(AbstractCreature creature)
         {
             //dropping items upon death

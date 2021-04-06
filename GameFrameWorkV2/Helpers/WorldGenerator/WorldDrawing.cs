@@ -13,13 +13,10 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
     {
         private World _world;
         private List<AbstractCreature> arr = new List<AbstractCreature>();
-
         public WorldDrawing(World world)
         {
             _world = world;
         }
-
-
         protected virtual void DrawEverything(ref AbstractCreature player)
         {
             DrawEdges(ref _world.WorldPlayGround);
@@ -27,9 +24,6 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
             DrawItemsOnTheGround(ref _world.WorldPlayGround);
             DrawCreature(ref _world.WorldPlayGround, ref player);
         }
-
-
-
         protected virtual void DrawEdges(ref Tile[,] playGround)
         {
             for (int i = 0; i < playGround.GetLength(0); i++)
@@ -84,11 +78,10 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
                     }
                 }
             }
+
             //this is the only way to draw a player??
             playground[player.Position.X, player.Position.Y].Ground = GroundTile.Player;
-
         }
-
 
         public virtual string DrawWorld(ref Tile[,] world, ref AbstractCreature player)
         {
@@ -107,8 +100,5 @@ namespace GameFrameWorkV2.Helpers.WorldGenerator
 
             return worldString.ToString();
         }
-
-
-
     }
 }

@@ -43,7 +43,6 @@ namespace GameFrameWorkV2.Creatures
 
         public abstract void Hit(ICreature defender);
 
-
         protected int CalculateDamge(int damage, ICreature defender)
         {
             var dmg = (damage - defender.DefencesItems.ReduceHitPoints);
@@ -77,7 +76,6 @@ namespace GameFrameWorkV2.Creatures
             }
             PickUpItem(world, itemName);
         }
-
         protected virtual void PickUpItem(World world, string itemName)
         {
             var items = world.WorldPlayGround[this.Position.X, this.Position.Y].Object;

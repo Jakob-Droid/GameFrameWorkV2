@@ -22,8 +22,6 @@ namespace GameFrameWorkV2.StartUp
         public AbstractCreature Player;
         private Random rnd;
 
-
-
         public Game(int worldMaxX, int worldMaxY)
         {
             Logger = new JsonTraceListener();
@@ -34,7 +32,6 @@ namespace GameFrameWorkV2.StartUp
             rnd = new Random();
             _draw = new WorldDrawing(World);
         }
-
         public void SetUpEnemyCreatures(int amountOfEnemies)
         {
             var rndRank = rnd.Next(0, 3);
@@ -53,7 +50,6 @@ namespace GameFrameWorkV2.StartUp
                 SetUpEnemyCreatures(--amountOfEnemies);
             }
         }
-
 
         public void SetUpPlayer(string name, Position? position)
         {
@@ -78,8 +74,6 @@ namespace GameFrameWorkV2.StartUp
                 }
             }
         }
-
-
 
         public void StartGame(string playerName, Position pos, int amountOfEnemies)
         {

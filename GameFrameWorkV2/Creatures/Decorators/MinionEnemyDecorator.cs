@@ -7,7 +7,5 @@
             Name = $"A feeble {creature.Name}";
             HitPoints -= 5;
         }
-
-
     }
 }
